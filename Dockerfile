@@ -1,24 +1,31 @@
-#Stage 1;
-#Step 1: Use official jdk image for build
+# ==============================
+# Stage 1: Build the project
+# ==============================
 FROM eclipse-temurin:17-jdk AS build
-WORKDIR /PortfolioService
-COPY ..
 
-#Step 2: Build Project
-RUN mvn clean package -DskipTests 
+# Set working directory
+WORKDIR /app
 
-#Stage 2;
-# Step 1: Use an official JDK image
+# Copy all source code into container
+COPY . .
+
+# Build the project (creates /app/target/*.jar)
+RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
+
+
+# ==============================
+# Stage 2: Run the app
+# ==============================
 FROM eclipse-temurin:17-jdk
 
-# Step 2: Set working directory inside container
-WORKDIR /PortfolioService
+# Set working directory inside container
+WORKDIR /app
 
-# Step 3: Copy your built jar file into the container
-COPY target/*.jar PortfolioService-0.0.1.jar
+# Copy the built jar file from the build stage
+COPY --from=build /app/target/*.jar app.jar
 
-# Step 4: Expose the port Render will use
+# Expose the port Render will use
 EXPOSE 8080
 
-# Step 5: Command to run your app
-ENTRYPOINT ["java", "-jar", "PortfolioService-0.0.1.jar"]
+# Run the Spring Boot app
+ENTRYPOINT ["java", "-jar", "app.jar"]
