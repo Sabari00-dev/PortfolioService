@@ -1,3 +1,13 @@
+#Stage 1;
+#Step 1: Use official jdk image for build
+FROM eclipse-temurin:17-jdk AS build
+WORKDIR /PortfolioService
+COPY ..
+
+#Step 2: Build Project
+RUN mvn clean package -DskipTests 
+
+#Stage 2;
 # Step 1: Use an official JDK image
 FROM eclipse-temurin:17-jdk
 
