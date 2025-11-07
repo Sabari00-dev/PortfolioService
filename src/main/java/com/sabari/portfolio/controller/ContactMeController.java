@@ -1,5 +1,6 @@
 package com.sabari.portfolio.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import com.sabari.portfolio.service.ContactMeService;
 
 @RestController
 @RequestMapping("contact-me")
+@CrossOrigin(origins = "*")
 public class ContactMeController {
 	private ContactMeService contactMeService;
 
