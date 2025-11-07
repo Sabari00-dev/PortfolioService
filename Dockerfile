@@ -2,13 +2,13 @@
 FROM eclipse-temurin:17-jdk
 
 # Step 2: Set working directory inside container
-WORKDIR /Portfolio
+WORKDIR /PortfolioService
 
 # Step 3: Copy your built jar file into the container
-COPY target/*.jar Portfolio.jar
+COPY target/*.jar PortfolioService.jar
 
 # Step 4: Expose the port Render will use
 EXPOSE 8080
 
 # Step 5: Command to run your app
-ENTRYPOINT ["java", "-jar", "Portfolio.jar"]
+ENTRYPOINT ["java", "-jar", "PortfolioService.jar"]
