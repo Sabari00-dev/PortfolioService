@@ -5,6 +5,6 @@ import com.sabari.portfolio.dto.ResponceDTO;
 
 public interface ContactMeService {
 
-	ResponceDTO sentMail(ContactMe contactMe);
+	ResponceDTO sentMail(ContactMe contactMe) ;
 
 }
